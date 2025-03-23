@@ -23,7 +23,7 @@ export default function LoginPage() {
 
       setTimeout(() => {
         router.push("/profile");
-      }, 2000);
+      }, 700);
       
     } catch (error: any) {
       console.log("Login Failed", error.message);
