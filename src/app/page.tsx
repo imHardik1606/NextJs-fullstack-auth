@@ -11,7 +11,9 @@ export default function Home() {
           width={180}
           height={38}
           priority
+          style={{ width: "auto", height: "auto" }} // ✅ Maintain aspect ratio
         />
+
         <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
           <li className="mb-2 tracking-[-.01em]">
             Get started by editing{" "}
