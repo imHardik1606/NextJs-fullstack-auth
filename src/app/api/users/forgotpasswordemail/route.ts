@@ -19,7 +19,7 @@ export async function POST(request: NextRequest) {
     await sendEmail({ email, emailType: "RESET", userId: user._id });
 
     return NextResponse.json({ message: "Reset email sent successfully" }, { status: 200 });
-  } catch (error: any) {
+  } catch (error:any) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }

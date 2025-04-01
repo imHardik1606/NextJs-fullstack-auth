@@ -32,7 +32,7 @@ export async function POST(request: NextRequest) {
     await user.save();
 
     return NextResponse.json({ message: "Password changed", success: true });
-  } catch (error: any) {
+  } catch (error:any) {
     return NextResponse.json({ message: error.message }, { status: 500 });
   }
 }
