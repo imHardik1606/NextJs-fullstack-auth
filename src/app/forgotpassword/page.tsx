@@ -1,7 +1,5 @@
-"use client";
-
 import axios from "axios";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 
@@ -14,11 +12,12 @@ export default function ForgotPassword() {
   const [token, setToken] = useState<string | null>(null); // Store token separately
 
   const router = useRouter();
-  const searchParams = useSearchParams();
 
   useEffect(() => {
-    setToken(searchParams.get("token")); // ✅ Set token in a safe useEffect
-  }, [searchParams]);
+    // Extract token manually from the URL
+    const urlParams = new URLSearchParams(window.location.search);
+    setToken(urlParams.get("token"));
+  }, []);
 
   const handleSubmit = async () => {
     setLoading(true);
