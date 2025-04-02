@@ -1,20 +1,21 @@
+"use client"; // <-- Add this at the very top
+
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 
-export default async function ForgotPassword() {
+export default function ForgotPassword() { // <-- Remove `async` from function
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const [buttonDisable, setButtonDisable] = useState(true);
-  const [token, setToken] = useState<string | null>(null); // Store token separately
+  const [token, setToken] = useState<string | null>(null); 
 
   const router = useRouter();
 
   useEffect(() => {
-    // Extract token manually from the URL
     const urlParams = new URLSearchParams(window.location.search);
     setToken(urlParams.get("token"));
   }, []);
