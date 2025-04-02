@@ -1,20 +1,23 @@
-"use client";
-
 import axios from "axios";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 
-export default function ForgotPassword() {
+export default async function ForgotPassword() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const [buttonDisable, setButtonDisable] = useState(true);
+  const [token, setToken] = useState<string | null>(null); // Store token separately
 
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const token = searchParams.get("token"); // ✅ Extract token from URL
+
+  useEffect(() => {
+    // Extract token manually from the URL
+    const urlParams = new URLSearchParams(window.location.search);
+    setToken(urlParams.get("token"));
+  }, []);
 
   const handleSubmit = async () => {
     setLoading(true);
@@ -32,8 +35,8 @@ export default function ForgotPassword() {
       }
 
       const res = await axios.post("/api/users/forgotpassword", {
-        token, // ✅ Include token in request
-        newPassword: password, // ✅ Send correct field
+        token,
+        newPassword: password,
       });
 
       console.log("Password changed", res.data);
